@@ -1,0 +1,294 @@
+{
+    "spells": [
+        {
+            "title": "Array",
+            "subtitle": "Alakazam",
+            "article": "Array.html"
+        },
+        {
+            "title": "Array Buffer",
+            "subtitle": "Accendium",
+            "article": "ArrayBuffer.html"
+        },
+        {
+            "title": "Boolean",
+            "subtitle": "Bonanza",
+            "article": "Boolean.html"
+        },
+        {
+            "title": "Data View",
+            "subtitle": "Daemon",
+            "article": "DataView.html"
+        },
+        {
+            "title": "Date",
+            "subtitle": "Dedisco",
+            "article": "Date.html"
+        },
+        {
+            "title": "Error",
+            "subtitle": "Epitome",
+            "article": "Error.html"
+        },
+        {
+            "title": "Eval Error",
+            "subtitle": "Electio",
+            "article": "EvalError.html"
+        },
+        {
+            "title": "Float 32 Array",
+            "subtitle": "Fabius",
+            "article": "Float32Array.html"
+        },
+        {
+            "title": "Float 64 Array",
+            "subtitle": "Fabium",
+            "article": "Float64Array"
+        },
+        {
+            "title": "Function",
+            "subtitle": "Festivus",
+            "article": "Function.html"
+        },
+        {
+            "title": "Generator",
+            "subtitle": "Galacticus",
+            "article": "Generator.html"
+        },
+        {
+            "title": "Generator Function",
+            "subtitle": "Galaxia",
+            "article": "GeneratorFunction.html"
+        },
+        {
+            "title": "Infinity",
+            "subtitle": "Infinitum",
+            "article": "Infinity.html"
+        },
+        {
+            "title": "Int 16 Array",
+            "subtitle": "Ignio",
+            "article": "Int16Array.html"
+        },
+        {
+            "title": "Int 32 Array",
+            "subtitle": "Ignivi",
+            "article": "Int32Array.html"
+        },
+        {
+            "title": "Int 8 Array",
+            "subtitle": "Ignitus",
+            "article": "Int8Array.html"
+        },
+        {
+            "title": "Internal Error",
+            "subtitle": "Illex",
+            "article": "InternalError.html"
+        },
+        {
+            "title": "Intl",
+            "subtitle": "Illo",
+            "article": "Intl.html"
+        },
+        {
+            "title": "Collator",
+            "subtitle": "Centauri",
+            "article": "Collator.html"
+        },
+        {
+            "title": "Date Time Format",
+            "subtitle": "Dubium",
+            "article": "DateTimeFormat.html"
+        },
+        {
+            "title": "Number Format",
+            "subtitle": "Nuance",
+            "article": "NumberFormat.html"
+        },
+        {
+            "title": "JSON",
+            "subtitle": "Jubilus",
+            "article": "JSON.html"
+        },
+        {
+            "title": "Map",
+            "subtitle": "Maleficus",
+            "article": "Map.html"
+        },
+        {
+            "title": "Math",
+            "subtitle": "Mantica",
+            "article": "Math.html"
+        },
+        {
+            "title": "NaN",
+            "subtitle": "Nascula",
+            "article": "NaN.html"
+        },
+        {
+            "title": "Number",
+            "subtitle": "Noa",
+            "article": "Number.html"
+        },
+        {
+            "title": "Object",
+            "subtitle": "Occasio",
+            "article": "Object.html"
+        },
+        {
+            "title": "Promise",
+            "subtitle": "Presto",
+            "article": "Promise.html"
+        },
+        {
+            "title": "Proxy",
+            "subtitle": "Propina",
+            "article": "Proxy.html"
+        },
+        {
+            "title": "Range Error",
+            "subtitle": "Raglorium",
+            "article": "RangeError.html"
+        },
+        {
+            "title": "Reference Error",
+            "subtitle": "Respicium",
+            "article": "ReferenceError.html"
+        },
+        {
+            "title": "Reflect",
+            "subtitle": "Reventio",
+            "article": "Reflect.html"
+        },
+        {
+            "title": "RegExp",
+            "subtitle": "Reysa",
+            "article": "RegExp.html"
+        },
+        {
+            "title": "Set",
+            "subtitle": "Saio",
+            "article": "Set.html"
+        },
+        {
+            "title": "String",
+            "subtitle": "Salitus",
+            "article": "String.html"
+        },
+        {
+            "title": "Symbol",
+            "subtitle": "Sandax",
+            "article": "Symbol.html"
+        },
+        {
+            "title": "Syntax Error",
+            "subtitle": "Sindicus",
+            "article": "SyntaxError.html"
+        },
+        {
+            "title": "Type Error",
+            "subtitle": "Telonium",
+            "article": "TypeError.html"
+        },
+        {
+            "title": "Typed Array",
+            "subtitle": "Targus",
+            "article": "TypedArray.html"
+        },
+        {
+            "title": "URI Error",
+            "subtitle": "Uxoratus",
+            "article": "URIError.html"
+        },
+        {
+            "title": "Unit 16 Array",
+            "subtitle": "Ura",
+            "article": "Unit16Array.html"
+        },
+        {
+            "title": "Unit 32 Array",
+            "subtitle": "Urla",
+            "article": "Unit32Array.html"
+        },
+        {
+            "title": "Unit 8 Array",
+            "subtitle": "Usia",
+            "article": "Unit8Array.html"
+        },
+        {
+            "title": "Unit 8 Clamped Array",
+            "subtitle": "Uptio",
+            "article": "Unit 8 Clamped Array.html"
+        },
+        {
+            "title": "Weak Map",
+            "subtitle": "Waivius",
+            "article": "WeakMap.html"
+        },
+        {
+            "title": "Weak Set",
+            "subtitle": "Waivium",
+            "article": "WeakSet.html"
+        },
+        {
+            "title": "decode URI",
+            "subtitle": "Defensio",
+            "article": "decodeURI.html"
+        },
+        {
+            "title": "decode URI Comp",
+            "subtitle": "Deforis",
+            "article": "decodeURIComponent.html"
+        },
+        {
+            "title": "encode URI",
+            "subtitle": "Eluvio",
+            "article": "encodeURI.html"
+        },
+        {
+            "title": "encode URI Comp",
+            "subtitle": "Eques",
+            "article": "encodeURIComponent.html"
+        },
+        {
+            "title": "eval",
+            "subtitle": "Erra",
+            "article": "eval.html"
+        },
+        {
+            "title": "isFinite",
+            "subtitle": "Ibanum",
+            "article": "isFinite.html"
+        },
+        {
+            "title": "isNaN",
+            "subtitle": "Impalare",
+            "article": "isNaN.html"
+        },
+        {
+            "title": "null",
+            "subtitle": "Nata",
+            "article": "null.html"
+        },
+        {
+            "title": "parseFloat",
+            "subtitle": "Paccus",
+            "article": "parseFlat.html"
+        },
+        {
+            "title": "parseInt",
+            "subtitle": "Pagare",
+            "article": "parseInt.html"
+        },
+        {
+            "title": "undefined",
+            "subtitle": "Unixio",
+            "article": "undefined.html"
+        },
+        {
+            "title": "uneval",
+            "subtitle": "Utom",
+            "article": "uneval.html"
+        }
+    ]
+}

@@ -1,42 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import Spell from '../components/Spell';
+import { spells } from '../spells.json';
 
 const styles = StyleSheet.create({
-    container: {
+    scroll: {
         flex: 1,
+    },
+    container: {
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     },
 });
 
 class Home extends Component {
-    static navigationOptions = { title: 'JSWizard' };
+    static navigationOptions = {
+        title: 'JSWizard',
+        header: {
+            tintColor: '#e74c3c',
+        },
+    };
     render() {
+        const spellElements = spells.map(({ title, subtitle, article }) => (
+            <Spell title={title} subtitle={subtitle} key={article} />
+        ));
         return (
-            <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome JSWizard!
-                </Text>
-                <Text style={styles.instructions}>
-                    To get started, edit index.ios.js
-                </Text>
-                <Text style={styles.instructions}>
-                    Press Cmd+R to reload,{'\n'}
-                    Cmd+D or shake for dev menu
-                </Text>
-            </View>
+            <ScrollView style={styles.scroll} contentContainerStyle={styles.container}>
+                {spellElements}
+            </ScrollView>
         );
     }
 }
-export default Home;
+export default connect()(Home);
