@@ -1,15 +1,16 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { StackNavigator } from 'react-navigation';
-import Home from './src/containers/Home';
+import { createStore, applyMiddleware, compose } from 'redux';
+import createLogger from 'redux-logger';
 import reducer from './src/reducers';
+import Application from './src/containers/Application';
 
-const store = createStore(reducer);
-const Application = StackNavigator({
-    Main: { screen: Home },
-});
+const development = global.__DEV__;
+
+const logger = createLogger();
+const middlewares = development ? [logger] : [];
+const store = compose(applyMiddleware(...middlewares))(createStore)(reducer);
 
 function JSWizard() {
     return (

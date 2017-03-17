@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { ScrollView, Image, View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 import Spell from '../components/Spell';
-import { spells } from '../spells.json';
+import spells from '../spells';
 import wizardImage from '../images/wizard.png';
 
 const styles = StyleSheet.create({
@@ -44,9 +45,12 @@ const styles = StyleSheet.create({
 });
 
 function Home({ spellPress }) {
-    const spellElements = spells.map(({ title, subtitle, article }) => (
-        <Spell title={title} subtitle={subtitle} key={article} onPress={spellPress(article)} />
-    ));
+    const spellElements = spells.map((spell) => {
+        const { title, subtitle, html } = spell;
+        return (
+            <Spell title={title} subtitle={subtitle} key={html} onPress={spellPress(spell)} />
+        );
+    });
     return (
         <View style={styles.view}>
             <ScrollView style={styles.spellbook} contentContainerStyle={styles.container}>
@@ -55,7 +59,7 @@ function Home({ spellPress }) {
             <View style={styles.footer}>
                 <Image style={styles.wizard} source={wizardImage} resizeMode="contain" />
                 <Text style={styles.message}>
-                    Welcome my JS Apprentice! Cast a spell to learn more.
+                    Welcome my JS Apprentice! Cast a spell to learn more about its power.
                 </Text>
             </View>
         </View>
@@ -71,6 +75,12 @@ Home.navigationOptions = {
     },
 };
 const mapDispatchToProps = dispatch => ({
-    spellPress: article => () => dispatch({ type: 'spellPress', article }),
+    spellPress: spell => () => {
+        const action = NavigationActions.navigate({
+            routeName: 'Article',
+            params: { spell },
+        });
+        dispatch(action);
+    },
 });
 export default connect(null, mapDispatchToProps)(Home);
