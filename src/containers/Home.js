@@ -17,17 +17,20 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     spellbook: {
+        position: 'absolute',
+        bottom: 0,
+        height: '100%',
         width: '100%',
     },
     footer: {
+        position: 'absolute',
+        bottom: 0,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
         height: 100,
         paddingBottom: 16,
-        borderTopWidth: 1,
-        borderColor: '#bdc3c7',
     },
     wizard: {
         width: 70,
@@ -41,6 +44,14 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         borderWidth: 1,
         borderColor: '#2c3e50',
+        overflow: 'hidden',
+        opacity: 0.9,
+    },
+    header: {
+        backgroundColor: '#e74c3c',
+    },
+    title: {
+        color: '#ecf0f1',
     },
 });
 
@@ -71,7 +82,8 @@ Home.propTypes = {
 Home.navigationOptions = {
     title: 'JSWizard',
     header: {
-        tintColor: '#e74c3c',
+        titleStyle: styles.title,
+        style: styles.header,
     },
 };
 const mapDispatchToProps = dispatch => ({
