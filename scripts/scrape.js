@@ -35,17 +35,10 @@ function scrapeArticle(url) {
         const $$ = cheerio.load(template);
 
         // Remove everything after Specifications
-        const children = article.contents();
-        let found = false;
-        children.each((index, child) => {
-            const element = $(child);
-            if (!found) {
-                found = (element.attr('id') === 'Specifications');
-            }
-            if (found) {
-                element.remove();
-            }
-        });
+        const splitElement = article.find('#Specifications');
+        const afterElements = splitElement.nextAll();
+        splitElement.remove();
+        afterElements.remove();
 
         // Remove anchor links
         links.each((index, link) => $(link).replaceWith($(link).contents()));
