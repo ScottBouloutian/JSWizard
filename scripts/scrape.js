@@ -34,15 +34,6 @@ function scrapeArticle(url) {
         const template = fs.readFileSync(templatePath, 'utf8');
         const $$ = cheerio.load(template);
 
-        // Modify the code sections
-        codeSections.each((index, codeSection) => {
-            $(codeSection).removeClass();
-            $(codeSection).contents().wrap('<code class="language-js" />');
-        });
-
-        // Remove anchor links
-        links.each((index, link) => $(link).replaceWith($(link).contents()));
-
         // Remove everything after Specifications
         const children = article.contents();
         let found = false;
@@ -55,6 +46,19 @@ function scrapeArticle(url) {
                 element.remove();
             }
         });
+
+        // Remove anchor links
+        links.each((index, link) => $(link).replaceWith($(link).contents()));
+
+        // Modify the code sections
+        codeSections.each((index, codeSection) => {
+            $(codeSection).removeClass();
+            $(codeSection).contents().wrap('<code class="language-js" />');
+        });
+
+        // Modify the tables
+        const tables = article.find('.fullwidth-table');
+        tables.each((index, table) => $(table).wrap('<div class="table-wrapper" />'));
 
         // Render the resulting html
         const parts = url.split('/');
