@@ -53,6 +53,10 @@ const styles = StyleSheet.create({
     title: {
         color: '#ecf0f1',
     },
+    spacer: {
+        width: '100%',
+        height: 100,
+    }
 });
 
 function Home({ spellPress }) {
@@ -66,6 +70,7 @@ function Home({ spellPress }) {
         <View style={styles.view}>
             <ScrollView style={styles.spellbook} contentContainerStyle={styles.container}>
                 {spellElements}
+                <View style={styles.spacer} />
             </ScrollView>
             <View style={styles.footer}>
                 <Image style={styles.wizard} source={wizardImage} resizeMode="contain" />

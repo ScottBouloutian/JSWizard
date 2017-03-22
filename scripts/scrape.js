@@ -43,6 +43,19 @@ function scrapeArticle(url) {
         // Remove anchor links
         links.each((index, link) => $(link).replaceWith($(link).contents()));
 
+        // Remove everything after Specifications
+        const children = article.contents();
+        let found = false;
+        children.each((index, child) => {
+            const element = $(child);
+            if (!found) {
+                found = (element.attr('id') === 'Specifications');
+            }
+            if (found) {
+                element.remove();
+            }
+        });
+
         // Render the resulting html
         const parts = url.split('/');
         const title = parts[parts.length - 1];
@@ -62,6 +75,7 @@ function scrapeArticle(url) {
         )).then((html) => {
             fs.unlinkSync(file);
             fs.writeFileSync(`${outputPath}/${title}.html`, html);
+            console.log(`Scraped ${title}`);
         });
     });
 }

@@ -1,11 +1,24 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { WebView } from 'react-native';
+import { WebView, StyleSheet, View } from 'react-native';
 import empty from '../empty.html';
+
+const styles = StyleSheet.create({
+    view: {
+        backgroundColor: '#ecf0f1',
+        width: '100%',
+        height: '100%',
+    },
+    web: {
+        backgroundColor: '#ecf0f1',
+    },
+});
 
 function Article({ html }) {
     return (
-        <WebView source={html} />
+        <View style={styles.view}>
+            <WebView style={styles.web} source={html} />
+        </View>
     );
 }
 Article.navigationOptions = {
