@@ -1,10 +1,14 @@
-import React, { PropTypes } from 'react';
-import { ScrollView, Image, View, Text, StyleSheet } from 'react-native';
+import React, { PropTypes, Component } from 'react';
+import { ScrollView, Image, View, Text, StyleSheet, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
+import Promise from 'bluebird';
 import Spell from '../components/Spell';
 import spells from '../spells';
 import wizardImage from '../images/wizard.png';
+import wand from '../images/wand.png';
+
+const getItem = Promise.promisify(AsyncStorage.getItem, { context: AsyncStorage });
+const setItem = Promise.promisify(AsyncStorage.setItem, { context: AsyncStorage });
 
 const styles = StyleSheet.create({
     view: {
@@ -50,54 +54,91 @@ const styles = StyleSheet.create({
     header: {
         backgroundColor: '#e74c3c',
     },
-    title: {
-        color: '#ecf0f1',
-    },
     spacer: {
         width: '100%',
         height: 100,
-    }
+    },
+    headerRight: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 16,
+    },
+    spellCasts: {
+        color: '#ecf0f1',
+        marginRight: 8,
+    },
+    wand: {
+        width: 16,
+        height: 16,
+    },
 });
 
-function Home({ spellPress }) {
-    const spellElements = spells.map((spell) => {
-        const { title, subtitle, html } = spell;
+class Home extends Component {
+    componentWillMount() {
+        const { getSpellCasts } = this.props;
+        getSpellCasts();
+    }
+
+    render() {
+        const { castSpell } = this.props;
+        const spellElements = spells.map((spell) => {
+            const { title, subtitle, html } = spell;
+            return (
+                <Spell title={title} subtitle={subtitle} key={html} onPress={castSpell(spell)} />
+            );
+        });
         return (
-            <Spell title={title} subtitle={subtitle} key={html} onPress={spellPress(spell)} />
-        );
-    });
-    return (
-        <View style={styles.view}>
-            <ScrollView style={styles.spellbook} contentContainerStyle={styles.container}>
-                {spellElements}
-                <View style={styles.spacer} />
-            </ScrollView>
-            <View style={styles.footer}>
-                <Image style={styles.wizard} source={wizardImage} resizeMode="contain" />
-                <Text style={styles.message}>
-                    Welcome my JS Apprentice! Cast a spell to learn more about its power.
-                </Text>
+            <View style={styles.view}>
+                <ScrollView style={styles.spellbook} contentContainerStyle={styles.container}>
+                    {spellElements}
+                    <View style={styles.spacer} />
+                </ScrollView>
+                <View style={styles.footer}>
+                    <Image style={styles.wizard} source={wizardImage} resizeMode="contain" />
+                    <Text style={styles.message}>
+                        Welcome my JS Apprentice! Cast a spell to learn more about its power.
+                    </Text>
+                </View>
             </View>
-        </View>
-    );
+        );
+    }
 }
 Home.propTypes = {
-    spellPress: PropTypes.func.isRequired,
+    getSpellCasts: PropTypes.func.isRequired,
+    castSpell: PropTypes.func.isRequired,
 };
 Home.navigationOptions = {
     title: 'JSWizard',
-    header: {
-        titleStyle: styles.title,
-        style: styles.header,
+    header: ({ state }) => {
+        const spellCasts = state.params ? state.params.spellCasts : 0;
+        return {
+            tintColor: '#ecf0f1',
+            style: styles.header,
+            right: (
+                <View style={styles.headerRight}>
+                    <Text style={styles.spellCasts}>{spellCasts}</Text>
+                    <Image style={styles.wand} source={wand} resizeMode="contain" />
+                </View>
+            ),
+        };
     },
 };
-const mapDispatchToProps = dispatch => ({
-    spellPress: spell => () => {
-        const action = NavigationActions.navigate({
-            routeName: 'Article',
-            params: { spell },
+const mapStateToProps = (state, { navigation }) => ({
+    castSpell: spell => () => {
+        const route = state.navigation.routes[0];
+        const params = route.params || { };
+        const spellCasts = (params.spellCasts || 0) + 1;
+        navigation.setParams({ spellCasts });
+        navigation.navigate('Article', { spell });
+        setItem('spellCasts', spellCasts.toString());
+    },
+    getSpellCasts: () => {
+        getItem('spellCasts').then((value) => {
+            const spellCasts = Number(value || 0);
+            navigation.setParams({ spellCasts });
         });
-        dispatch(action);
     },
 });
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);

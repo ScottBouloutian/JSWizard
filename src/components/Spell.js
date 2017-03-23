@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
     },
     spark: {
         position: 'absolute',
-        width: '200%',
-        height: '200%',
-        top: '-50%',
-        left: '-50%',
+        width: '250%',
+        height: '250%',
+        top: '-75%',
+        left: '-75%',
         opacity: 0.85,
     },
     view: {

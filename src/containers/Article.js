@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     web: {
         backgroundColor: '#ecf0f1',
     },
+    header: {
+        backgroundColor: '#e74c3c',
+    },
 });
 
 function Article({ html }) {
@@ -23,6 +26,10 @@ function Article({ html }) {
 }
 Article.navigationOptions = {
     title: ({ state }) => state.params.spell.title,
+    header: {
+        tintColor: '#ecf0f1',
+        style: styles.header,
+    },
 };
 Article.propTypes = {
     html: PropTypes.number,
