@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import { ScrollView, Image, View, Text, StyleSheet, AsyncStorage } from 'react-native';
+import { ScrollView, Image, View, Text, StyleSheet, AsyncStorage, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Promise from 'bluebird';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Spell from '../components/Spell';
 import spells from '../spells';
 import wizardImage from '../images/wizard.png';
@@ -73,12 +74,15 @@ const styles = StyleSheet.create({
         width: 16,
         height: 16,
     },
+    info: {
+        margin: 16,
+    },
 });
 
 class Home extends Component {
     componentWillMount() {
-        const { getSpellCasts } = this.props;
-        getSpellCasts();
+        const { setNavigationState } = this.props;
+        setNavigationState();
     }
 
     render() {
@@ -106,16 +110,22 @@ class Home extends Component {
     }
 }
 Home.propTypes = {
-    getSpellCasts: PropTypes.func.isRequired,
+    setNavigationState: PropTypes.func.isRequired,
     castSpell: PropTypes.func.isRequired,
 };
 Home.navigationOptions = {
     title: 'JSWizard',
     header: ({ state }) => {
-        const spellCasts = state.params ? state.params.spellCasts : 0;
+        const params = state.params || { };
+        const { spellCasts, navigateInfo } = params;
         return {
             tintColor: '#ecf0f1',
             style: styles.header,
+            left: (
+                <TouchableOpacity style={styles.info} onPress={navigateInfo}>
+                    <Icon name="info-circle" size={16} color="#ecf0f1" />
+                </TouchableOpacity>
+            ),
             right: (
                 <View style={styles.headerRight}>
                     <Text style={styles.spellCasts}>{spellCasts}</Text>
@@ -134,10 +144,14 @@ const mapStateToProps = (state, { navigation }) => ({
         navigation.navigate('Article', { spell });
         setItem('spellCasts', spellCasts.toString());
     },
-    getSpellCasts: () => {
+    setNavigationState: () => {
         getItem('spellCasts').then((value) => {
             const spellCasts = Number(value || 0);
-            navigation.setParams({ spellCasts });
+            const navigateInfo = () => navigation.navigate('Info');
+            navigation.setParams({
+                spellCasts,
+                navigateInfo,
+            });
         });
     },
 });
