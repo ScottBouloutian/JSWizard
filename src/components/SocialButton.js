@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
     touchable: {
-        width: 224,
+        width: 232,
         height: 40,
         margin: 8,
     },
@@ -15,11 +15,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#e74c3c',
         padding: 16,
         borderRadius: 8,
+        width: '100%',
     },
     text: {
         color: '#ecf0f1',
         textAlign: 'center',
-        width: '100%',
+        width: 174,
+        marginLeft: 8,
     },
 });
 
@@ -28,7 +30,7 @@ function SocialButton({ icon, text, href }) {
     return (
         <TouchableOpacity style={styles.touchable} onPress={onPress}>
             <View style={styles.button}>
-                <Icon name={icon} color="#ecf0f1" />
+                <Icon name={icon} color="#ecf0f1" size={18} />
                 <Text style={styles.text}>{text}</Text>
             </View>
         </TouchableOpacity>
