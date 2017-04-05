@@ -1,8 +1,9 @@
-import React from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
+import React, { PropTypes } from 'react';
+import { View, Image, StyleSheet, Text, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import profile from '../images/profile.png';
-import SocialButton from '../components/SocialButton';
+import IconButton from '../components/IconButton';
+import { loadProducts, purchaseProduct, restorePurchases } from '../actions/purchases';
 
 const styles = StyleSheet.create({
     view: {
@@ -31,20 +32,43 @@ const styles = StyleSheet.create({
     },
 });
 
-function Info() {
+function Info({ load, products, purchase, restore }) {
+    const productButtons = products.map(product => (
+        <IconButton
+          key={product.identifier} icon="credit-card" color="#27ae60"
+          text={product.title} onPress={purchase(product.identifier)}
+        />
+    ));
+    if (productButtons.length > 0) {
+        productButtons.push((
+            <IconButton
+              key="restore-button" icon="refresh" color="#27ae60"
+              text="Restore Purchases" onPress={restore}
+            />
+        ));
+    }
+    const openWebsite = () => Linking.openURL('http://www.ScottBouloutian.com');
+    const openGithub = () => Linking.openURL('https://github.com/scottbouloutian');
     return (
-        <View style={styles.view}>
+        <View style={styles.view} onLayout={load}>
             <Image style={styles.profile} source={profile} resizeMode="contain" />
             <Text style={styles.bio}>
                 My name is
                 <Text style={styles.name}> Scott Bouloutian </Text>
                 and I am a software engineer with a passion for technology.
             </Text>
-            <SocialButton icon="safari" text="www.ScottBouloutian.com" href="http://www.ScottBouloutian.com" />
-            <SocialButton icon="github" text="ScottBouloutian" href="https://github.com/scottbouloutian" />
+            <IconButton icon="safari" text="www.ScottBouloutian.com" onPress={openWebsite} />
+            <IconButton icon="github" text="ScottBouloutian" onPress={openGithub} />
+            {productButtons}
         </View>
     );
 }
+Info.propTypes = {
+    load: PropTypes.func.isRequired,
+    products: PropTypes.arrayOf(PropTypes.object).isRequired,
+    purchase: PropTypes.func.isRequired,
+    restore: PropTypes.func.isRequired,
+};
 Info.navigationOptions = {
     title: 'Information',
     header: {
@@ -52,4 +76,12 @@ Info.navigationOptions = {
         style: styles.header,
     },
 };
-export default connect()(Info);
+const mapStateToProps = state => ({
+    products: state.purchases.products,
+});
+const mapDispatchToProps = dispatch => ({
+    load: () => dispatch(loadProducts).catch(() => {}),
+    purchase: id => () => dispatch(purchaseProduct(id)).catch(() => {}),
+    restore: () => dispatch(restorePurchases).catch(() => {}),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Info);
