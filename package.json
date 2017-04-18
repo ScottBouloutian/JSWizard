@@ -2,6 +2,7 @@
   "name": "JSWizard",
   "version": "1.0.0",
   "private": true,
+  "license": "GPL-3.0+",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "scrape": "node scripts/scrape",
